@@ -43,11 +43,6 @@ const Login = () => {
   const {
     state: { user },
   } = useContext(AuthContext);
-  console.log(user);
-
-  // const { loading, error, data } = useQuery(GET_USER_INFO, {
-  //   variables: { id: localStorage.getItem('userId') },
-  // });
 
   const { loading, error, data } = useQuery(GET_CUSTOMER_PRODUCTS, {
     variables: {
@@ -119,6 +114,11 @@ const GET_CUSTOMER_PRODUCTS = gql`
         customer {
           id
           name
+          products {
+            nodes {
+              id
+            }
+          }
         }
         previews {
           nodes {
