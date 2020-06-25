@@ -1,18 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import '../src/styles/index.css'
-import App from '../src/components/App'
-import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '../src/styles/index.css';
+import App from './App';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { Provider as AuthProvider } from './context/AuthContext';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
-})
+  uri: 'https://staging-api.sayduck.io/graphql',
+});
 
 //Apollo Client
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </ApolloProvider>,
-  document.getElementById('root'),
-)
+  document.getElementById('root')
+);
