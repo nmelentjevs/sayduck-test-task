@@ -52,14 +52,14 @@ const Login = () => {
       },
     })
       .then((data) => {
-        console.log(data.data);
-        localStorage.setItem('token', data.data.authenticateUser.user.token);
-        localStorage.setItem('user', data.data.authenticateUser.user);
-        setUser(data.data.authenticateUser.user);
+        const { user } = data.data.authenticateUser;
+        sessionStorage.setItem('token', user.token);
+        sessionStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
         history.push('/products');
       })
       .catch((err) => {
-        setAlert({ msg: 'Invalid login', type: 'error' });
+        setAlert({ msg: err.message.split(':')[1], type: 'error' });
         console.log(err);
       });
   };
@@ -129,6 +129,7 @@ const LOGIN_USER = gql`
         path
       }
       user {
+        id
         token
         customer {
           products {

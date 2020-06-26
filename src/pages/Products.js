@@ -46,15 +46,17 @@ const Login = () => {
 
   const { loading, error, data } = useQuery(GET_CUSTOMER_PRODUCTS, {
     variables: {
-      ids: JSON.parse(localStorage.getItem('user')).customer.products.nodes.map(
-        (node) => node.id
-      ),
+      ids: user
+        ? user.customer.products.nodes.map((node) => node.id)
+        : JSON.parse(
+            sessionStorage.getItem('user')
+          ).customer.products.nodes.map((node) => node.id),
     },
   });
   console.log(loading, error, data);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     history.push('/');
   };
 
@@ -88,7 +90,7 @@ const Login = () => {
             );
           })
         ) : (
-          <Typography h2>Nothing to show</Typography>
+          <Typography variant="h4">Nothing to show</Typography>
         )}
         <Grid container justify="center">
           <Button variant="contained" color="secondary" onClick={handleLogout}>

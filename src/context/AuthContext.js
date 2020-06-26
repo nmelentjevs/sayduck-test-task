@@ -32,5 +32,5 @@ const signout = (dispatch) => async ({ history }) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { setUser, signout },
-  { user: {}, token: null, errorMessage: '', loading: false }
+  { user: null, token: null, errorMessage: '', loading: false }
 );

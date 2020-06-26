@@ -8,6 +8,14 @@ import { Provider as AuthProvider } from './context/AuthContext';
 
 const client = new ApolloClient({
   uri: 'https://staging-api.sayduck.io/graphql',
+  request: (operation) => {
+    const token = sessionStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    });
+  },
 });
 
 //Apollo Client

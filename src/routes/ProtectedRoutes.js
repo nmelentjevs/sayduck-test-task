@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router';
 
 export const ProtectedRoute = (props) => {
   let redirectPath = '';
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   if (!token) {
     redirectPath = props.authenticationPath;
   }
@@ -17,7 +17,7 @@ export const ProtectedRoute = (props) => {
 };
 
 export const GuestRoute = (props) => {
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   if (token) {
     const renderComponent = () => <Redirect to={{ pathname: '/products' }} />;
     return <Route {...props} component={renderComponent} render={undefined} />;
