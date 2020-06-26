@@ -35,8 +35,6 @@ const UploadButton = ({ productId }) => {
 
   const handleCapture = ({ target }) => {
     const fileReader = new FileReader();
-    const name = target.accept.includes('image') ? 'images' : 'videos';
-    console.log(target.files);
 
     fileReader.readAsDataURL(target.files[0]);
     fileReader.onload = async (e) => {
@@ -48,7 +46,12 @@ const UploadButton = ({ productId }) => {
       }
       console.log(generatedUrl);
 
-      const files3Url = await axios
+      //
+      // TODO
+      // FIX UPLOADING
+      //
+
+      await axios
         .post(
           generatedUrl.data.generateS3PresignedUrl.s3PresignedUrls.nodes[0].url,
           {

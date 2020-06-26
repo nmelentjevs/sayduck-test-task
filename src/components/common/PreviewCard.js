@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   card: {
