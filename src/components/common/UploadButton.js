@@ -52,6 +52,9 @@ const UploadButton = ({ productId }) => {
         .post(
           generatedUrl.data.generateS3PresignedUrl.s3PresignedUrls.nodes[0].url,
           {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+            },
             ...generatedUrl.data.generateS3PresignedUrl.s3PresignedUrls.nodes[0]
               .formData,
             file: e.currentTarget.result,
